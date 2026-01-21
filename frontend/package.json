@@ -1,0 +1,19 @@
+{
+  "name": "ft-transcendence-frontend",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "npm run build:js && npm run build:html",
+    "build:js": "esbuild src/main.ts --bundle --outfile=dist/main.js --minify --sourcemap",
+    "build:html": "mkdir -p dist && cp src/index.html dist/",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.22",
+    "esbuild": "^0.19.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.5.0",
+    "vite": "^7.2.2"
+  }
+}

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ft_transcendence — Pong</title>
+    <script>
+      // Suppress Tailwind CSS CDN warning in development - MUST run before Tailwind loads
+      (function() {
+        var originalWarn = console.warn;
+        console.warn = function() {
+          if (arguments[0] && typeof arguments[0] === 'string' && 
+              arguments[0].includes('cdn.tailwindcss.com')) {
+            return; // Suppress this specific warning
+          }
+          originalWarn.apply(console, arguments);
+        };
+        
+        // Note: Browser network logs (like "POST /api/login 401") are shown by the browser's
+        // DevTools and cannot be suppressed via JavaScript. These are informational logs,
+        // not errors. To hide them:
+        // - Chrome: Console settings → uncheck "Log XMLHttpRequests"
+        // - Or use Console filter: -/POST|GET/ or -/api/
+      })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      /* Hide scrollbars while maintaining scroll functionality */
+      *::-webkit-scrollbar {
+        display: none;
+      }
+      * {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-900 text-white antialiased">
+    <div id="root" class="min-h-screen flex flex-col">
+      <nav class="hidden"></nav>
+
+      <!-- This element stays and receives content from router -->
+      <main id="app" class="flex-1"></main>
+    </div>
+
+    <script src="/main.js"></script>
+  </body>
+</html>

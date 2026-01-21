@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ft_backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      # - ./backend/data:/app/data
+      - ./certs:/app/certs:ro
+     # - ./backend/.env:/app/.env:ro 
+    env_file:
+      - ./backend/.env 
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ft_frontend
+    ports:
+      - "8080:80"
+      - "8443:443"
+    environment:
+      - BACKEND_URL=http://backend:3000
+      - WS_URL=wss://localhost/ws
+    volumes:
+      - ./certs:/etc/nginx/certs:ro
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
